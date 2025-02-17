@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <title>My Valentine</title>
+    <style>
+        .hidden {
+            display: none !important;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .modal-animate {
+            animation: modalEntrance 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes modalEntrance {
+            0% { transform: scale(0.5) rotate(-10deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0); opacity: 1; }
+        }
+
+        .slide-animate {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+        
+        .love-rain {
+            position: fixed;
+            pointer-events: none;
+            z-index: -10;
+        }
+        
+        .love-particle {
+            position: absolute;
+            animation: fall linear infinite;
+            font-size: 24px;
+            opacity: 0.7;
+            z-index: -10;
+        }
+    </style>
+</head>
+<body class="bg-pink-900 h-screen overflow-hidden">
+    <div id="particles" class="fixed inset-0 z-0"></div>
+
+    <div class="relative z-10 h-screen flex flex-col items-center justify-center text-center px-4 space-y-8">
+        <div class="animate-float">
+            <svg class="w-32 h-32 md:w-48 md:h-48 text-red-500" fill="currentColor" viewbox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-bold text-white transform transition-all duration-300 hover:scale-105">
+            💖 Happy Valentine's Day, My Love! 💖
+        </h1>
+
+        <button onclick="openModal()" 
+                class="bg-gradient-to-r from-red-500 to-pink-500 hover:from-pink-500 hover:to-red-500 text-white text-xl px-8 py-4 rounded-full transform transition-all duration-300 hover:scale-110 shadow-xl hover:shadow-2xl">
+            Buka Kejutan Spesial!
+        </button>
+    </div>
+
+    <div id="modal" class="fixed inset-0 overflow-hidden bg-black bg-opacity-75 hidden z-50 flex items-center justify-center p-4 modal-animate">
+        <div id="love-rain" class="fixed inset-0 z-0"></div>
+        <div class="bg-white rounded-xl max-w-4xl w-full overflow-hidden shadow-2xl fixed z-10">
+            <button onclick="closeModal()" 
+                    class="absolute top-4 right-4 text-red-500 z-30 text-3xl hover:text-red-600 transition-transform hover:rotate-90">
+                ✕
+            </button>
+
+            <div class="relative h-96 overflow-hidden">
+                <div id="slides" class="flex transition-transform duration-500 ease-in-out">
+                    <div class="w-full flex-shrink-0 relative">
+                        <img src="https://cdn.pixabay.com/photo/2016/11/23/17/56/couple-1854081_1280.jpg" 
+                             class="w-full h-96 object-cover rounded-t-xl" 
+                             alt="Our Memory">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black p-6 text-center">
+                            <p class="text-white text-xl font-semibold">Momen Bahagia Bersamamu 💑</p>
+                        </div>
+                    </div>
+                    <div class="w-full flex-shrink-0 relative">
+                        <img src="https://cdn.pixabay.com/photo/2019/04/18/22/51/love-4138303_1280.jpg" 
+                             class="w-full h-96 object-cover rounded-t-xl" 
+                             alt="Our Memory">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black p-6 text-center">
+                            <p class="text-white text-xl font-semibold">Kenangan Manis Kita 🥰</p>
+                        </div>
+                    </div>
+                    <div class="w-full flex-shrink-0 relative">
+                        <img src="https://cdn.pixabay.com/photo/2015/08/31/19/24/couple-915991_1280.jpg" 
+                             class="w-full h-96 object-cover rounded-t-xl" 
+                             alt="Our Memory">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black p-6 text-center">
+                            <p class="text-white text-xl font-semibold">Cinta Kita Selamanya 💍</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="absolute bottom-4 left-0 right-0 flex justify-between px-4">
+                <button onclick="prevSlide()" 
+                        class="bg-white bg-opacity-75 p-3 rounded-full hover:bg-opacity-100 transition-all transform hover:scale-125 shadow-lg">
+                    ❮
+                </button>
+                <button onclick="nextSlide()" 
+                        class="bg-white bg-opacity-75 p-3 rounded-full hover:bg-opacity-100 transition-all transform hover:scale-125 shadow-lg">
+                    ❯
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        particlesJS('particles', {
+            particles: {
+                number: { value: 100 },
+                color: { value: '#ffffff' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5 },
+                size: { value: 3 },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false
+                }
+            }
+        });
+        
+
+        let currentSlide = 0;
+        const slider = document.getElementById('slides');
+        const totalSlides = document.querySelectorAll('#slides > div').length;
+
+        function updateSlide() {
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlide();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlide();
+        }
+
+        function createLoveRain() {
+            const container = document.getElementById('love-rain');
+        }
+
+        function clearLoveRain() {
+            const container = document.getElementById('love-rain');
+            container.innerHTML = '';
+        }
+
+        function openModal() {
+            const modal = document.getElementById('modal');
+            particlesJS('modal', {
+                particles: {
+                    number: { value: 30 },
+                    color: { value: '#ff3f3f' },
+                    shape: {
+                        type: 'image',
+                        image: {
+                            src: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBmaWxsPSIjZmYzZjNmIj48cGF0aCBkPSJNMTIgMjEuMzVsLTEuNDUtMS4zMkM1LjQgMTUuMzYgMiAxMi4yOCAyIDguNSAyIDUuNDIgNC40MiAzIDcuNSAzYzEuNzQgMCAzLjQxLjgxIDQuNSAyLjA5QzEzLjA5IDMuODEgMTQuNzYgMyAxNi41IDMgMTkuNTggMyAyMiA1LjQyIDIyIDguNWMwIDMuNzgtMy40IDYuODYtOC41NSAxMS41NEwxMiAyMS4zNXoiLz48L3N2Zz4='
+                        }
+                    },
+                    opacity: { value: 0.8 },
+                    size: { value: 16 },
+                    move: {
+                        enable: true,
+                        speed: 5,
+                        direction: 'bottom',
+                        straight: true,
+                        out_mode: 'out',
+                        bounce: false
+                    }
+                }
+            });
+            modal.classList.remove('hidden');
+            modal.classList.remove('opacity-0');
+            modal.classList.add('opacity-100', 'flex');
+            createLoveRain();
+            currentSlide = 0;
+            updateSlide();
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+            clearLoveRain();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if(e.key === 'Escape') closeModal();
+            if(e.key === 'ArrowLeft') prevSlide();
+            if(e.key === 'ArrowRight') nextSlide();
+        });
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        slider.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        slider.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if(touchStartX - touchEndX > 50) nextSlide();
+            if(touchStartX - touchEndX < -50) prevSlide();
+        });
+    </script>
+</body>
+</html>
