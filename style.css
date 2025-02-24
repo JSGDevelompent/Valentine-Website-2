@@ -1,0 +1,44 @@
+
+        .hidden {
+            display: none !important;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .modal-animate {
+            animation: modalEntrance 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes modalEntrance {
+            0% { transform: scale(0.5) rotate(-10deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0); opacity: 1; }
+        }
+
+        .slide-animate {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100vh) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+        
+        .love-rain {
+            position: fixed;
+            pointer-events: none;
+            z-index: -10;
+        }
+        
+        .love-particle {
+            position: absolute;
+            animation: fall linear infinite;
+            font-size: 24px;
+            opacity: 0.7;
+            z-index: -10;
+        }
