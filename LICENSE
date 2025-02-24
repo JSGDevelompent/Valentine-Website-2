@@ -22,7 +22,7 @@ SOFTWARE.
 
 ---
 
-### **Notes:**
+**Notes:**
 1. **Third-Party Scripts:**
    - This project uses **TailwindCSS (via CDN)** and **Particles.js**.  
    - These libraries are **not included in this license** and remain under their respective open-source licenses.
