@@ -19,3 +19,20 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+### **Notes:**
+1. **Third-Party Scripts:**
+   - This project uses **TailwindCSS (via CDN)** and **Particles.js**.  
+   - These libraries are **not included in this license** and remain under their respective open-source licenses.
+
+2. **Images from Pixabay:**
+   - The images used in this project are sourced from **Pixabay**:
+     - [Image 1](https://cdn.pixabay.com/photo/2016/11/23/17/56/couple-1854081_1280.jpg)
+     - [Image 2](https://cdn.pixabay.com/photo/2019/04/18/22/51/love-4138303_1280.jpg)
+     - [Image 3](https://cdn.pixabay.com/photo/2015/08/31/19/24/couple-915991_1280.jpg)
+   - Pixabay images are **free to use**, but they are subject to **Pixabay's own license**.
+   - These images are **not covered by the MIT License** and should not be redistributed separately.
+
+---
